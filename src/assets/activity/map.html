@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0">
+    <title>场馆平面图</title>
+    <script>
+        ;
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'onorientationchange' in window ? 'onorientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if (clientWidth >= 750) {
+                        docEl.style.fontSize = '100px';
+                    } else {
+                        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                    }
+                };
+
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+            recalc();
+        })(document, window);
+    </script>
+    <style>
+        html {
+            font-size: 50px;
+        }
+
+        html,
+        body {
+            font-family: "PingFang SC", "Helvetica Neue", STHeiti, "Microsoft Yahei", Tahoma, Simsun, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        ol, ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .page-container {
+            font-size: 14px;
+            padding-bottom: .5rem;
+            border-top: 1px solid transparent;
+        }
+        .title {
+            text-align: center;
+            color: #e30112
+        }
+        .desc {
+            padding: 0 .5rem;
+            text-align: center;
+            color: #696867;
+        }
+        .index {
+            color: #696867;
+            text-align: center;
+        }
+        .map {
+            display: inline-block;
+            width: 100%;
+            vertical-align: bottom;
+        }
+        .areas {
+            width: 6.6rem;
+            margin: 0 auto .8rem;
+            background: #f7f6f6;
+        }
+        .areas ul {
+            padding: .3rem;
+        }
+        .areas ul > li {
+            margin-top: .3rem;
+        }
+        .areas ul > li:first-child {
+            margin: 0;
+        }
+        .areas ul .left-ar {
+            display: inline-block;
+            margin-right: .2rem;
+            width: 1.6rem;
+            height: .36rem;
+            line-height: .36rem;
+            text-align: center;
+            color: #fff;
+            font-size: 12px;
+            background: #e54846;
+        }
+        .areas ul .right-ar {
+            color: #696867;
+            line-height: .36rem;
+            vertical-align: bottom;
+        }
+        .blow-text p {
+            font-size: 13px;
+            color: #202d52;
+        }
+        .blow-text p span:first-child {
+            display: inline-block;
+            padding-right: .3rem;
+            text-align: right;
+            width: 60%;
+        }
+        .blow-text .blow-rf {
+            color: #e54846;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-container">
+        <h2 class="title">会展中心平面图</h2>
+        <p class="desc" style="text-align: left">因会展中心为下沉式建筑，主题大会所在为L层，其余会场需往下层前往</p>
+        <h1 class="index">L</h1>
+        <img src="./imgs/map/L.png" class="map">
+        <p class="desc" style="margin-bottom: .8rem">大会主会场和展区</p>
+
+        <h1 class="index">3F</h1>
+        <img src="./imgs/map/3F.png" class="map">
+        <div class="areas">
+            <ul>
+                <li>
+                    <span class="left-ar">301</span>
+                    <span class="right-ar">产业融合分论坛</span>
+                </li>
+                <li>
+                    <span class="left-ar">307</span>
+                    <span class="right-ar">汽车云分论坛</span>
+                </li>
+                <li>
+                    <span class="left-ar">309</span>
+                    <span class="right-ar">小微企业云分论坛</span>
+                </li>
+                <li>
+                    <span class="left-ar">312</span>
+                    <span class="right-ar">企业金融云分论坛</span>
+                </li>
+                <li>
+                    <span class="left-ar">313</span>
+                    <span class="right-ar">烟草云分论坛</span>
+                </li>
+                <li>
+                    <span class="left-ar">316</span>
+                    <span class="right-ar">协同服务分论坛</span>
+                </li>
+                <li>
+                    <span class="left-ar">318</span>
+                    <span class="right-ar">采购服务分论坛</span>
+                </li>
+                <li>
+                    <span class="left-ar">321</span>
+                    <span class="right-ar">智慧广信分论坛</span>
+                </li>
+                <li>
+                    <span class="left-ar">322</span>
+                    <span class="right-ar">用友广信沟通交流室</span>
+                </li>
+            </ul>
+        </div>
+
+
+        <h1 class="index">2F</h1>
+        <img src="./imgs/map/2F.png" class="map">
+        <div class="areas">
+            <ul>
+                <li>
+                    <span class="left-ar">211</span>
+                    <span class="right-ar">税务服务分论坛</span>
+                </li>
+                <li>
+                    <span class="left-ar">216</span>
+                    <span class="right-ar">数据服务分论坛</span>
+                </li>
+                <li>
+                    <span class="left-ar">大宴会厅A</span>
+                    <span class="right-ar">智能制造分论坛</span>
+                </li>
+                <li>
+                    <span class="left-ar">大宴会厅B</span>
+                    <span class="right-ar">营销服务分论坛</span>
+                </li>
+                <li>
+                    <span class="left-ar">大宴会厅C</span>
+                    <span class="right-ar">财务服务分论坛</span>
+                </li>
+            </ul>
+        </div>
+
+
+        <h1 class="index">1F</h1>
+        <img src="./imgs/map/1F.png" class="map">
+        <div class="areas">
+            <ul>
+                <li>
+                    <span class="left-ar">106</span>
+                    <span class="right-ar">U8+分论坛</span>
+                </li>
+                <li>
+                    <span class="left-ar">107</span>
+                    <span class="right-ar">建筑云分论坛</span>
+                </li>
+                <li>
+                    <span class="left-ar">108</span>
+                    <span class="right-ar">友金所分论坛</span>
+                </li>
+                <li>
+                    <span class="left-ar">多功能厅A</span>
+                    <span class="right-ar">云平台分论坛</span>
+                </li>
+                <li>
+                    <span class="left-ar">多功能厅B</span>
+                    <span class="right-ar">数字人力分论坛</span>
+                </li>
+                <li>
+                    <span class="left-ar">多功能厅E</span>
+                    <span class="right-ar">云市场分论坛</span>
+                </li>
+                <li>
+                    <span class="left-ar">1号报告厅</span>
+                    <span class="right-ar">U8 Cloud分论坛</span>
+                </li>
+                <li>
+                    <span class="left-ar">2号报告厅</span>
+                    <span class="right-ar">工程•地产分论坛</span>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="blow-text">
+            <p><span>中建雁栖湖景酒店昆仑厅</span><span class="blow-rf">医疗行业分论坛</span></p>
+            <p><span>日出东方凯宾斯基-会议室8+9</span><span class="blow-rf">教育云分论坛</span></p>
+            <p><span>法官培训中心学院剧场</span><span class="blow-rf">能源云分论坛</span></p>
+        </div>
+    </div>
+    <script type="text/javascript" src="./libs/jquery-1.8.3.min.js"></script>
+</body>
+<script>
+    $(function () {
+        // 图片预览
+        var bridgeInit = false;
+        var basePath = window.location.protocol + '//' + window.location.host;
+        
+        function connectWebViewJavascriptBridge(callback){
+			if (window.WebViewJavascriptBridge) {
+				callback(WebViewJavascriptBridge)
+			} else {
+				document.addEventListener('WebViewJavascriptBridgeReady', function(){
+					callback(WebViewJavascriptBridge)
+				}, false)
+			}
+        }
+        
+		document.getElementsByTagName("body")[0].onclick = function(e) {
+			if(e.target.tagName === 'IMG') {
+                var url = basePath + "/conference/app/assets/activity" + e.target.getAttribute("src").replace(".", "");
+				connectWebViewJavascriptBridge(function(YonYouJSBridge) {
+					if(!bridgeInit) {
+						bridgeInit = true;
+						YonYouJSBridge.init(function (message, responseCallback) {});
+					}
+					 var data = {
+						 'function': 'viewImage',
+						 parameters: {
+							 files: url,
+							 index: 0
+						 }
+					 };
+					 YonYouJSBridge.send(JSON.stringify(data), function(responseData){});
+				 })
+			 }
+		}
+    })
+</script>
+
+</html>

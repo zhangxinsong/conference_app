@@ -1,0 +1,61 @@
+// 主题颜色
+@main-color : #00B8D9 ;
+// active红色
+@red : #E14C46 ;
+
+.border1pxTop( @color , @padding:0 ){
+	&::before{
+		content: '';
+		display: block;
+		position: absolute;
+		left: @padding;
+		right: @padding;
+		top: 0;
+		height: 1px;/*no*/
+		transform: scale3d(1,0.5,1);
+		background: @color;
+		transform-origin: top;
+	}
+}
+.border1pxBottom( @color , @padding:0 ){
+	&::after{
+		content: '';
+		display: block;
+		position: absolute;
+		left: @padding;
+		right: @padding;
+		bottom: 0;
+		height: 1px;/*no*/
+		transform: scale3d(1,0.5,1);
+		background: @color;
+		transform-origin: bottom;
+	}
+}
+.border1pxLeft( @color , @padding:0 ){
+	&::before{
+		content: '';
+		display: block;
+		position: absolute;
+		left: 0;
+		bottom: @padding;
+		top: @padding;
+		width: 1px;/*no*/
+		transform: scale3d(0.5,1,1);
+		background: @color;
+		transform-origin: left;
+	}
+}
+.border1pxRight( @color , @padding:0 ){
+	&::after{
+		content: '';
+		display: block;
+		position: absolute;
+		right: 0;
+		bottom: @padding;
+		top: @padding;
+		width: 1px;/*no*/
+		transform: scale3d(0.5,1,1);
+		background: @color;
+		transform-origin: right;
+	}
+}

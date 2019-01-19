@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0">
+    <title>这是用友</title>
+    <script>
+        ;(function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'onorientationchange' in window ? 'onorientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if (clientWidth >= 750) {
+                        docEl.style.fontSize = '100px';
+                    } else {
+                        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                    }
+                };
+
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+            recalc();
+        })(document, window);
+    </script>
+    <style>
+        html {
+	        font-size: 50px;
+        }
+        html, body {
+            padding: 0;
+            margin: 0;
+            background: #f3f3f3;
+        }
+        img {
+            display: inline-block;
+            vertical-align: bottom;
+            width: 100%;
+        }
+        .btn {
+            width: 6.9rem;
+            padding: .24rem 0;
+            margin: .6rem auto;
+            color: #fff;
+            text-align: center;
+            font-size: 15px;
+            background: #E14C46;
+            border-radius: .1rem;
+        }
+    </style>
+</head>
+<body>
+    <img src="../imgs/event/sub/1-1.png">
+    <div class="btn">下一页</div>
+
+    <script>
+        var basePath = window.location.protocol + '//' + window.location.host,
+            initBridge = false;
+        function connectWebViewJavascriptBridge(callback) {
+            if (window.WebViewJavascriptBridge) {
+                callback(WebViewJavascriptBridge);
+            } else {
+                document.addEventListener('WebViewJavascriptBridgeReady', function () {
+                    callback(WebViewJavascriptBridge);
+                }, false);
+            }
+        }
+
+    	document.getElementsByClassName("btn")[0].onclick = function() {
+			var pathName = (window.location.host.indexOf("localhost") !== -1
+							|| window.location.host === "") ?
+							'/src/assets/activity/event-sub/' : 
+							'/conference/app/assets/activity/event-sub/',
+
+				url = basePath + pathName + "page1-2.html";
+			// if (window.WebViewJavascriptBridge) {
+			// 	connectWebViewJavascriptBridge(function(YonYouJSBridge) {
+            //         if (!initBridge) {
+            //             initBridge = true;
+            //             YonYouJSBridge.init(function (message, responseCallback) {});
+            //         }
+			// 		var data = {
+			// 			'function': 'openWindow',
+			// 			'parameters': {
+			// 				orientation: 1,
+			// 				url: url || ""
+			// 			}
+			// 		};
+			// 		YonYouJSBridge.send(JSON.stringify(data), function(responseData){});
+			// 	})
+			// } else {
+			// 	window.location.href = url;
+            // }
+            window.location.replace(url);
+        }
+    </script>
+</body>
+</html>

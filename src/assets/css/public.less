@@ -1,0 +1,306 @@
+@import './fonts/style.css';
+@import './reset.less';
+@import './var.less';
+@import './face.less';
+
+html, body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    font-size: 0.32rem;
+    color: #333;
+    word-break: break-all;
+}
+input{color: #adadad}
+input:focus{color:#adadad}
+input::-webkit-input-placeholder{
+    color:#adadad;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #ccc;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #ccc;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+    color: #ccc;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+    color: #ccc;
+}
+
+
+// 覆盖mint-ui颜色
+.mint-header {
+  background-color: @main-color
+};
+.mint-button:not(.is-disabled):active::after {
+    opacity: .2
+}
+.mint-button--primary {
+    background-color: @main-color
+}
+.mint-button--primary.is-plain {
+    border: 1px solid @main-color;
+    color: @main-color
+}
+.mint-badge.is-primary {
+    background-color: @main-color
+}
+.mint-switch-input:checked + .mint-switch-core {
+    border-color: @main-color;
+    background-color: @main-color
+}
+.mint-navbar .mint-tab-item.is-selected {
+    border-bottom-color: @main-color;
+    color: @main-color
+}
+.mint-tabbar > .mint-tab-item.is-selected {
+    color: @main-color
+}
+.mint-searchbar-cancel {
+    color: @main-color
+}
+.mint-checkbox-input:checked + .mint-checkbox-core {
+    background-color: @main-color;
+    border-color: @main-color
+}
+.mint-radio-input:checked + .mint-radio-core {
+    background-color: @main-color;
+    border-color: @main-color
+}
+.mt-range-progress {
+    background-color: @main-color
+}
+.mt-progress-progress {
+    background-color: @main-color
+}
+.mint-msgbox-confirm {
+    color: @main-color
+}
+.mint-msgbox-confirm:active {
+    color: @main-color
+}
+.mint-datetime-action {
+    color: @main-color
+}
+.mint-indicator-wrapper{
+    z-index: 10;
+}
+
+body{
+	.mint-msgbox-header{
+        padding: 0.2rem 0 ;
+		.mint-msgbox-title{
+            display: none;
+        }
+	}
+    .mint-msgbox-btns{
+        &>button{
+            font-size: 16px;
+        }
+    }
+    .mint-msgbox-message{
+        color: #777;
+        line-height: 0.76rem;
+        margin-bottom: 0.1rem;
+    }
+    .mint-msgbox-input{
+        input{
+            font-size: 14px;
+        }
+    }
+	.mint-toast-icon{
+		font-size: 1rem;
+	}
+	.mint-toast.is-placemiddle{
+        top: 45%;
+		padding: 0.28rem 0.4rem!important ;
+	}
+    .mint-actionsheet-listitem{
+        border-bottom: solid 1px #e0e0e0;/*no*/
+        border-bottom: solid 0.5px #e0e0e0;/*no*/
+    }
+    .mint-msgbox-content{
+        border-bottom: solid 1px #e0e0e0;/*no*/
+        border-bottom: solid 0.5px #e0e0e0;/*no*/ 
+    }
+    .mint-msgbox-cancel{
+        border-right: solid 1px #e0e0e0;/*no*/
+        border-right: solid 0.5px #e0e0e0;/*no*/   
+    }
+    .mint-switch{
+        margin-right:2px;
+    }
+}
+
+
+// overflow : scroll ;
+.scroll {
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+}
+
+// 超出省略号
+.elli{
+    text-overflow: ellipsis; 
+    white-space:nowrap;
+    overflow-x: hidden; 
+}
+
+// loading背景
+.img-wait{
+    background: url('../images/wait.gif') no-repeat 50% 50%;
+    background-size: 25px 25px;
+}
+
+// 表情大小
+.face-png{
+    display: inline-block;
+    width: 18px;
+    vertical-align: middle;
+    margin: 2px;/*no*/
+}
+
+
+// directive loading样式 ;
+.v-loading-wrap{
+    pointer-events: none;
+    position: absolute;
+    left: 0;top: 0;right: 0;bottom: 0;  
+    z-index: 10;
+    .loading{
+        z-index: 10;
+        font-size:0.4rem;
+        color: @red;
+        width: 2rem;height: 2rem;line-height: 2rem;
+        text-align: center;
+        font-size: 1rem;
+        position: absolute;
+        left:calc(50% - 1rem);
+        top:calc(45% - 1rem);
+        transform-origin: 50% 50%;
+        animation: rot_animate 0.7s infinite linear;
+        .icon-spinner2{
+            line-height:unset;
+        }
+    }
+}
+@keyframes rot_animate{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+// loading样式 ;
+.g-load-mask{
+    pointer-events: none;
+    position: absolute;
+    left: 0;top: 0;right: 0;bottom: 0;  
+    z-index: 10;
+    .loading{
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        left: 50%;top: 45%;
+        transform: translate(-50%,-50%);
+        background: rgba(0,0,0,0.6);
+        text-align: center;
+        border-radius: 10px;
+        .rot{
+            width: 40px;
+            height: 40px;
+            margin-top: 18px;
+            margin-left: 30px;
+            animation: g_loading 0.7s infinite linear;
+            transform-origin: 50% 50%;
+            img{ 
+                width: 100%;
+                height: 100%; 
+            }
+        }
+        p{
+            margin-top: 15px;
+            font-size: 12px;
+            color: white;
+        }
+    }
+}
+@keyframes g_loading{
+    5%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+// 没数据样式
+.v-nodata-wrap{
+    pointer-events: none;
+    position: absolute;
+    left: 0;top: 0;right: 0;bottom: 0; 
+    z-index: 10;
+    // background:white;
+    .nodata{
+        z-index: 10;
+        text-align: center;
+        position: absolute;
+        left: 50%;top: 46%;
+        transform: translate(-50%,-50%);
+        &>img{
+            width:190px;
+        }
+        &>p{
+            margin-top:40px;
+            line-height: 20px;
+            font-size:14px;
+            color:#999;
+        }
+    }
+}
+
+// 过度效果 ;
+.fade-enter{
+    opacity:0.5!important;
+}
+
+
+//未开始、进行中、已结束样式
+.no-start{
+    padding: 0 6px;
+    height: 17px;
+    background: #F3F3F3;
+    color: #FFAB00;
+    font-size: 11px;
+    line-height: 17px;
+    text-align: center;
+    border-radius: 3px;
+}
+.doing{
+    padding: 0 6px;
+    height: 17px;
+    background: #F3F3F3;
+    color: #2BA497;
+    font-size: 11px;
+    line-height: 17px;
+    text-align: center;
+    border-radius: 3px;
+}
+.finished{
+    padding: 0 6px;
+    height: 17px;
+    background: #F3F3F3;
+    color: #CCCCCC;
+    font-size: 11px;
+    line-height: 17px;
+    text-align: center;
+    border-radius: 3px;
+}

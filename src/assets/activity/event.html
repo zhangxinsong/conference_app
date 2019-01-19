@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <title>用友30年</title>
+    <script>
+        ;
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'onorientationchange' in window ? 'onorientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if (clientWidth >= 750) {
+                        docEl.style.fontSize = '100px';
+                    } else {
+                        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                    }
+                };
+
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+            recalc();
+        })(document, window);
+    </script>
+    <style>
+        html {
+            font-size: 50px;
+        }
+
+        html,
+        body {
+            font-family: "PingFang SC", "Helvetica Neue", STHeiti, "Microsoft Yahei", Tahoma, Simsun, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        #app {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #app .paly-btn {
+            position: absolute;
+            top: .3rem;
+            right: .3rem;
+            z-index: 2;
+            width: .6rem;
+            height: .6rem;
+            background: url(./imgs/event/musicplayer.svg) no-repeat center / contain;
+        }
+
+        #app .paly-btn.playing {
+            animation: rotating 2s linear infinite;
+            -webkit-animation: rotating 2s linear infinite;
+            -moz-animation: rotating 1.2s linear infinite;
+        }
+
+        @keyframes rotating {
+            100% {
+                transform: rotate(360deg);
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes rotating {
+            100% {
+                transform: rotate(360deg);
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        #dowebok {
+            height: 100%;
+        }
+
+        .section {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        p, ol, ul {
+            padding: 0;
+            margin: 0;
+        }
+        ol, ul {
+            list-style: none;
+        }
+
+        .review_1 {
+            background: #C22520 url("./imgs/event/01.png") no-repeat center / contain;
+        }
+
+        .review_2 {
+            background: url("./imgs/event/02.png") no-repeat top / contain;
+        }
+
+        .review_3 {
+            background: #f1f1f1 url("./imgs/event/03.png") no-repeat top / contain;
+        }
+
+        .review_4 {
+            font-size: 14px;
+            color: #333;
+            background: rgba(243,243,243,1);
+        }
+        .review_4 ul {
+            width: 6.9rem;
+            /* height: 8.4rem; */
+            margin: 0 auto;
+            overflow: auto;
+        }
+        .review_4 ul > li:first-child {
+            margin-top: .3rem;
+        }
+        .review_4 ul > li {
+            position: relative;
+            margin-top: .2rem;
+            padding: .16rem .3rem .16rem .4rem;
+            background: #fff;
+            border-radius: .12rem;
+            line-height: .34rem;
+            -webkit-box-shadow: 0px .02rem .18rem .01rem rgba(0, 0, 0, 0.1);
+            box-shadow: 0px .02rem .18rem .01rem rgba(0, 0, 0, 0.1);
+        }
+        .review_4 .item-left p:first-child {
+            font-weight: bold;
+        }
+        .review_4 .item-left p:nth-child(2) {
+            color: #999;
+        }
+        .review_4 .link {
+            position: absolute;
+            top: 50%;
+            right: .3rem;;
+            margin-top: -.15rem;
+            width: .18rem;
+            height: .3rem;
+        }
+        .review_4 .title-bg {
+            display: inline-block;
+            vertical-align: bottom;
+            width: 100%;
+        }
+
+        .next {
+            position: absolute;
+            bottom: .2rem;
+            left: 50%;
+            width: 0.47rem;
+            height: 0.47rem;
+            z-index: 1;
+        }
+
+        .next.active {
+            -webkit-animation: move 1s infinite linear;
+            animation: move 1s infinite linear;
+        }
+
+        @keyframes move {
+            0% {
+                -webkit-transform: translate(0px, 0px);
+                transform: translate(0px, 0px);
+            }
+            50% {
+                -webkit-transform: translate(0px, -5px);
+                transform: translate(0px, -5px);
+            }
+            100% {
+                -webkit-transform: translate(0px, 0px);
+                transform: translate(0px, 0px);
+            }
+        }
+
+        @-webkit-keyframes move {
+            0% {
+                -webkit-transform: translate(0px, 0px);
+                transform: translate(0px, 0px);
+            }
+            50% {
+                -webkit-transform: translate(0px, -5px);
+                transform: translate(0px, -5px);
+            }
+            100% {
+                -webkit-transform: translate(0px, 0px);
+                transform: translate(0px, 0px);
+            }
+        }
+
+        /*分享模板*/
+
+        #share_board *{
+			color: #292F33;
+			margin: 0;
+			padding: 0;
+		}
+		#share_board{
+			font-size: 14px;
+			text-align: center;
+			position: fixed;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			top: 0;
+			overflow: hidden;
+			background: rgba(0,0,0,0.3);
+			opacity: 0;
+			z-index: -100;
+			-webkit-transition-delay: 0.5s;
+			-moz-transition-delay: 0.5s;
+			-ms-transition-delay: 0.5s;
+			-o-transition-delay: 0.5s;
+			transition-delay: 0.5s;
+		}
+		#share_board.open{
+			display: block;
+			opacity: 1;
+			z-index: 99999999;
+			-webkit-transition-delay: 10ms;
+			-moz-transition-delay: 10ms;
+			-ms-transition-delay: 10ms;
+			-o-transition-delay: 10ms;
+			transition-delay: 10ms;
+		}
+		#share_board ul{
+			padding: 0;
+			padding-bottom: 15px;
+			padding-top: 20px;
+		}
+		#share_board .main{
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			padding-top: 15px;
+			background: #f0f5f6;
+			-webkit-transform: translate3d(0,198px,0);
+			-moz-transform: translate3d(0,198px,0);
+			-ms-transform: translate3d(0,198px,0);
+			-o-transform: translate3d(0,198px,0);
+			transform: translate3d(0,198px,0);
+			-webkit-transition: transform 0.2s linear 0.1s;
+			-moz-transition: transform 0.2s linear 0.1s;
+			-ms-transition: transform 0.2s linear 0.1s;
+			-o-transition: transform 0.2s linear 0.1s;
+			transition: transform 0.2s linear 0.1s;
+		}
+		#share_board.open .main{
+			-webkit-transform: translate3d(0,0,0);
+			-moz-transform: translate3d(0,0,0);
+			-ms-transform: translate3d(0,0,0);
+			-o-transform: translate3d(0,0,0);
+			transform: translate3d(0,0,0);
+		}
+		#share_board li{
+			width: 25%;
+			list-style: none;
+			display: inline-block;
+			text-align: center;
+		}
+		#share_board li .img-container{
+			width: 60px;
+			height: 60px;
+			background: #fff;
+			border-radius: 60px;
+			display: inline-block;
+			line-height: 60px;
+			margin-bottom: 10px;
+		}
+		#share_board li {
+			font-size: 12px;
+		}
+		#share_board li .img-container img{
+			width: 30px;
+			vertical-align: middle;
+		}
+		#share_board .cancel{
+			line-height: 45px;
+			background: #fff;
+			font-size: 16px;
+        }
+        
+        
+        .circle {
+            position: absolute;
+            display: inline-block;
+            top: 50%;
+            right: .4rem;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+        /* 保持大小不变的小圆点 */
+        .dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            background-color: #E14C46;
+            z-index: 2;
+            border-radius: 50%;
+            -webkit-transform: translate(-55%, -55%);
+            -ms-transform: translate(-55%, -55%);
+            transform: translate(-55%, -55%);
+        }
+
+        /* 产生动画（向外扩散变大）的圆圈 第一个圆 */
+        .pulse {
+            width: 35px;
+            height: 35px;
+            border: 1px solid #E14C46;
+            z-index: 1;
+            opacity: 0;
+            border-radius: 50%;
+            -webkit-animation: warn 2s ease-out;
+            -moz-animation: warn 2s ease-out;
+            animation: warn 2s ease-out;
+            -webkit-animation-iteration-count: infinite;
+            -moz-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+            box-shadow: 1px 1px 30px #E14C46;
+        }
+        /* 产生动画（向外扩散变大）的圆圈 第二个圆 */
+        .pulse1 {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 35px;
+            height: 35px;
+            border: 1px solid #E14C46;
+            z-index: 1;
+            opacity: 0;
+            border-radius: 50%;
+            -webkit-animation: warn1 2s ease-out;
+            -moz-animation: warn1 2s ease-out;
+            animation: warn1 2s ease-out;
+            -webkit-animation-iteration-count: infinite;
+            -moz-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+            box-shadow: 1px 1px 30px #E14C46;
+        }
+        @keyframes warn {
+            0% {
+                transform: scale(0.3);
+                -webkit-transform: scale(0.3);
+                opacity: 0;
+            }
+
+            25% {
+                transform: scale(0.3);
+                -webkit-transform: scale(0.3);
+                opacity: 0.3;
+            }
+
+            50% {
+                transform: scale(0.5);
+                -webkit-transform: scale(0.5);
+                opacity: 0.5;
+            }
+
+            75% {
+                transform: scale(0.8);
+                -webkit-transform: scale(0.8);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1);
+                -webkit-transform: scale(1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes warn1 {
+            0% {
+                transform: scale(0.3);
+                -webkit-transform: scale(0.3);
+                opacity: 0;
+            }
+
+            25% {
+                transform: scale(0.3);
+                -webkit-transform: scale(0.3);
+                opacity: 0.3;
+            }
+
+            50% {
+                transform: scale(0.3);
+                -webkit-transform: scale(0.3);
+                opacity: 0.5;
+            }
+
+            75% {
+                transform: scale(0.5);
+                -webkit-transform: scale(0.5);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(0.8);
+                -webkit-transform: scale(0.8);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <audio autoplay="true" loop="true" class="bg-music" style="display: none">
+            <source src="./mp3/真心英雄.mp3" type="audio/mpeg"> 抱歉，您的浏览器不支持 audio 元素。
+        </audio>
+        <div class="paly-btn playing"></div>
+        <img src="./imgs/event/next.png" class="next active">
+        <div id="dowebok">
+            <!-- 回顾1 -->
+            <div class="section review_1"></div>
+            <!-- 回顾2 -->
+            <div class="section review_2"></div>
+            <!-- 回顾3 -->
+            <div class="section review_3"></div>
+            <!-- 回顾4 -->
+            <div class="section review_4">
+                <img src="./imgs/event/title.png" class="title-bg">
+                <ul>
+                    <li>
+                        <div class="item-left">
+                            <p>这是用友</p>
+                            <p>Here is yonyou</p>
+                        </div>
+                        <div class="circle">
+                            <div class="dot"></div>
+                            <div class="pulse"></div>
+                            <div class="pulse1"></div>
+                        </div>
+                        <img src="./imgs/event/left.png" class="link">
+                    </li>
+                    <li>
+                        <div class="item-left">
+                            <p>为服务企业而生</p>
+                            <p>Meant for Enterprise Services</p>
+                        </div>
+                        <img src="./imgs/event/left.png" class="link">
+                    </li>
+                    <li>
+                        <div class="item-left">
+                            <p>重新定义企业服务</p>
+                            <p>Redefine Enterprise Services</p>
+                        </div>
+                        <img src="./imgs/event/left.png" class="link">
+                    </li>
+                    <li>
+                        <div class="item-left">
+                            <p>相伴企业发展30年</p>
+                            <p>Development History from 1988</p>
+                        </div>
+                        <img src="./imgs/event/left.png" class="link">
+                    </li>
+                    <li>
+                        <div class="item-left">
+                            <p>企业文化与社会责任</p>
+                            <p>Corporate culture & Social Responsibility</p>
+                        </div>
+                        <img src="./imgs/event/left.png" class="link">
+                    </li>
+                    <li>
+                        <div class="item-left">
+                            <p>用友公司成员企业</p>
+                            <p>Members of the yonyou</p>
+                        </div>
+                        <img src="./imgs/event/left.png" class="link">
+                    </li>
+                    <li>
+                        <div class="item-left">
+                            <p>与企业共同成长</p>
+                            <p>Grow Up With Enterprise</p>
+                        </div>
+                        <img src="./imgs/event/left.png" class="link">
+                    </li>
+                    <li>
+                        <div class="item-left">
+                            <p>与伙伴共创企业服务产业繁荣</p>
+                            <p>Grow Up With Partners</p>
+                        </div>
+                        <img src="./imgs/event/left.png" class="link">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="./libs/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="./libs/jquery.fullPage.min.js"></script>
+</body>
+<script>
+    $(function () {
+        var basePath = window.location.protocol + '//' + window.location.host;
+
+        
+        function getQueryStringArgs() {
+            var params = window.location.search.length > 0 ? window.location.search.substring(1) : "",
+                itemsArr = params.length ? params.split("&") : [],
+                item = [],
+                args = {};
+            itemsArr.forEach(function (val, key) {
+                item = val.split("=");
+                if (decodeURIComponent(item[0]).length) {
+                    args[decodeURIComponent(item[0])] = decodeURIComponent(item[1]);
+                }
+            })
+            return args;
+        };
+        $('#dowebok').fullpage({
+            touchSensitivity: 13, // 触摸滑动可以跳转到下一个section的距离
+            scrollingSpeed: 1000,
+            recordHistory: false,
+            animateAnchor: false,
+            anchors: ['page1', 'page2', 'page3', 'page4'],
+            afterLoad: function(anchorLink, index) {
+                if (index === $(".section").length) {
+                    $('.next').removeClass("active").hide();
+                    var height = +$(".review_4")[0].style.height.replace("px", "") - $(".title-bg")[0].clientHeight;
+                    $(".review_4 ul").css("height", height);
+                }else {
+                    if(index == 1) {
+                        $('.next').attr("src", "./imgs/event/next.png");
+                    }else {
+                        $('.next').attr("src", "./imgs/event/next_1.png");
+                    }
+                    $('.next').addClass("active").show();
+                }
+            }
+        });
+
+        // 播放背景音乐(chrome64以后 autoplay策略有变)
+        var promise = $(".bg-music")[0].play();
+        if (promise !== undefined) {
+            promise.then(function () {}).catch(function () {
+                // $(".paly-btn").css("display", "block");
+                $(".paly-btn").removeClass("playing");
+            });
+        }
+        $(".paly-btn").on("click", function () {
+            if ($(".bg-music")[0].paused) {
+                $(".bg-music")[0].play();
+                $(".paly-btn").addClass("playing");
+            } else {
+                $(".bg-music")[0].pause();
+                $(".paly-btn").removeClass("playing");
+            }
+        });
+
+
+        //Jsbrige
+        function connectWebViewJavascriptBridge(callback) {
+            if (window.WebViewJavascriptBridge) {
+                callback(WebViewJavascriptBridge);
+            } else {
+                document.addEventListener('WebViewJavascriptBridgeReady', function () {
+                    callback(WebViewJavascriptBridge);
+                }, false);
+            }
+        }
+        // 跳转详情页
+		$(".review_4 ul li").on("click", function(e) {
+			var index = $(e.currentTarget).index(),
+
+				pathName = (window.location.host.indexOf("localhost") !== -1
+							|| window.location.host === "") ?
+							'/src/assets/activity/event-sub/page' : 
+							'/conference/app/assets/activity/event-sub/page',
+
+				url = basePath + pathName + (++index) + ".html";
+			if (window.WebViewJavascriptBridge) {
+				connectWebViewJavascriptBridge(function(YonYouJSBridge) {
+					var data = {
+						'function': 'openWindow',
+						'parameters': {
+							orientation: 1,
+							url: url || ""
+						}
+					};
+					YonYouJSBridge.send(JSON.stringify(data), function(responseData){});
+				})
+			} else {
+				window.location.href = url;
+			}
+		})
+
+        connectWebViewJavascriptBridge(function (YonYouJSBridge) {
+            YonYouJSBridge.init(function (message, responseCallback) {});
+            var data = {
+                'function': 'configNavBar',
+                parameters: {
+                    "centerItems": [{
+                        "title": "用友30年"
+                    }],
+                    "rightItems": [{
+                        "title": "分享",
+                        "callback": "share",
+                    }]
+                }
+            };
+            YonYouJSBridge.registerHandler('share', function(data, responseCallback) {
+                openShareBoard();
+            });
+            YonYouJSBridge.send(JSON.stringify(data), function (responseData) {});
+
+            // 分享
+            function share(type){
+            	var data = {
+            		'function': 'share',
+            		parameters: {
+            			title: '用友30年',
+            			content: '30年奋力前行，30年峥嵘岁月，用友云，世界级，我们在路上',
+            			url: basePath + "/conference/app/assets/activity/event.html",
+            			imgUrl: basePath +'/conference/app/assets/activity/imgs/event/share.png',
+            			share_type: type
+            		}
+            	};
+            	YonYouJSBridge.send(JSON.stringify(data), function(responseData){});	
+            }
+
+            // 点击分享弹出框
+            function openShareBoard(){
+            	var $shareBoadDom = $('#share_board');
+            	var basePath = window.location.protocol + '//' + window.location.host;
+            	if(!$shareBoadDom.length){
+            		var $shareBoadDom = $('<div id="share_board"><div class="main">- 推荐分享 -<ul></ul><div class="cancel">取消</div></div></div>'),
+            			imgUrlHost = basePath + '/conference/app/assets/activity/imgs/share/',
+            			$shareItem,
+            			innerShare = [
+            				{
+            					icon:'share_contact.png',
+            					shareType:6,
+            					target:'同事'
+            				},
+            				{
+            					icon:'share_esn.png',
+            					shareType:5,
+            					target:'友空间'
+            				},
+            				{
+            					icon:'share_wx.png',
+            					shareType:3,
+            					target:'微信'
+            				},
+            				{
+            					icon:'share_wx_circle.png',
+            					shareType:4,
+            					target:'朋友圈'
+            				}
+            			];
+            		for(var i = 0,j = innerShare.length;i<j;i++){
+            			(function(){
+            				var k = i;
+            				shareItem = $('<li><div class="img-container"><img src="'+imgUrlHost+innerShare[i].icon+'"/></div><div>'+innerShare[i].target+'</div></li>');
+            				shareItem.click(function(){
+            					share(innerShare[k].shareType);
+            				});
+            				shareItem.appendTo($shareBoadDom.find('ul'));
+            			})()
+            		}
+            		$('body').append($shareBoadDom);
+            	}
+            	setTimeout(function(){
+            		$shareBoadDom.click(function(){
+            			$shareBoadDom.removeClass('open');
+            		})
+            		$shareBoadDom.addClass('open');
+            	},200)
+            }
+        });
+    })
+</script>
+</html>
