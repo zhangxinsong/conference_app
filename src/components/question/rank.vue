@@ -11,8 +11,8 @@
                 <span class="rankTime">{{examType == 'SCORE' ? item.totalScore : (item.totalTime/1000).toFixed(2)+'s' }}</span>
             </li>
         </ul>
-        <div v-else>
-            zanwushuju
+        <div v-else class="nodata">
+            暂无数据
         </div>
     </div>
 </template>
@@ -103,6 +103,9 @@ export default {
                 }
             }
         }
-        
+        .nodata{
+            text-align: center;
+            margin-top: 20px;
+        }
     }
 </style>

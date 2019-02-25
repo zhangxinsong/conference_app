@@ -43,7 +43,8 @@
 					},
 					contentType: 'json',
 					success(res){
-						console.log(res);
+						G.UI.say("保存成功");
+						this.$router.back();
 					}
 				})
 			}

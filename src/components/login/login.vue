@@ -7,7 +7,7 @@
             <span class="mobile">用户名</span><input type="text" v-model="loginName"><br>
             <span class="password">密码</span><input type="password" v-model="password"> 
         </div>
-        <div class="zhuce" @click="toSignup"><span>注册</span></div>
+        <div class="zhuce"><span @click="toSignup">注册</span></div>
         <div class="signin" @click="submit">登录</div>
     </div>
 </template>

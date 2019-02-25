@@ -6,7 +6,7 @@
 				<li class="firstLi">大会列表</li>
 				<li class="cList" v-for="(v,k) in conList" @click="getList(v.id)" :key="k">
 					{{v.name}}<br>
-					<span>{{time(v.startTime)}}--{{time(v.endTime)}}</span>
+					<span class="time">{{time(v.startTime)}}--{{time(v.endTime)}}</span>
 				</li>
 			</ul>
 			<!-- 数据 -->
@@ -83,9 +83,6 @@
 				})
 			},
 			toPage(v){
-				let token = sessionStorage.getItem('conferenceToken');
-				let lang = sessionStorage.getItem('lang');
-				let qzId = this.$root.userInfo.qzId;
 				if( v.url.indexOf('/conferenceSign')>0 ){
 					G.BRIDGE.scanQRCode();
 					return ;
@@ -93,8 +90,6 @@
 				if( v.url[0]=='#' ){
 					let p = v.url.split('#')[1];
 					this.$router.push( p );
-				}else if( v.url.indexOf('http://')>-1||v.url.indexOf('https://')>-1 ){
-					location.href = v.url + '&qzId=' + qzId + '&lang=' + lang;
 				}
 			},
 			
@@ -127,7 +122,7 @@
 					width: 100%;
 					height: 60px;
 					text-align: center;
-					font-size: 30px;
+					font-size: 28px;
 				}
 				.cList{
 					width: 80%;
@@ -140,6 +135,8 @@
 					display: block;
 					span{
 						font-size: 16px;
+						margin-top: 20px;
+						display: block;
 					}
 				}
 				li{
